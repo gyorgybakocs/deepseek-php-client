@@ -13,6 +13,7 @@
 - [Quick Start Guide](#quick-start-guide)
     - [Basic Usage](#basic-usage)
     - [Advanced Usage](#advanced-usage)
+    - [Use With Frameworks](#use-with-frameworks)
 - [Testing](#testing)
 - [Contributors](#contributors-)
 - [License](#license)
@@ -77,6 +78,10 @@ $response = DeepseekClient::build($apiKey, 'https://api.deepseek.com/v2', 500)
 
 echo 'API Response:'.$response;
 ```
+
+## Use With Frameworks
+
+### [Laravel Deepseek Package](https://github.com/deepseek-php/deepseek-laravel)
 
 ---
 
