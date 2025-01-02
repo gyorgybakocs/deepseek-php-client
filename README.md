@@ -58,7 +58,7 @@ $response = DeepseekClient::build($apiKey)
 echo 'API Response:'.$response;
 ```
 
-**Note**: in easy mode it will take defaults for all configs [Check Default Values](https://github.com/deepseek-php/deepseek-php-client/blob/main/src/Enums/Configs/DefaultConfigs.php)
+**Note**: in easy mode it will take defaults for all configs [Check Default Values](https://github.com/deepseek-php/deepseek-php-client/blob/master/src/Enums/Configs/DefaultConfigs.php)
 
 ### **Advanced Usage**
 
