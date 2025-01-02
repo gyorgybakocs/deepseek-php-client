@@ -42,9 +42,9 @@ composer require deepseek-php/deepseek-php-client
 
 ---
 
-## **3. Quick Start Guide**
+## Quick Start Guide
 
-### **Basic Usage**
+### Basic Usage
 
 ```php
 use DeepseekPhp\DeepseekClient;
@@ -60,7 +60,7 @@ echo 'API Response:'.$response;
 
 **Note**: in easy mode it will take defaults for all configs [Check Default Values](https://github.com/deepseek-php/deepseek-php-client/blob/master/src/Enums/Configs/DefaultConfigs.php)
 
-### **Advanced Usage**
+### Advanced Usage
 
 ```php
 use DeepseekPhp\DeepseekClient;
@@ -80,7 +80,7 @@ echo 'API Response:'.$response;
 
 ---
 
-## **7. Testing**
+## Testing
 
 tests will come soon .
 
@@ -96,7 +96,7 @@ Thanks to these wonderful people for contributing to this project! 💖
   <tr>
     <td align="center">
       <a href="https://github.com/omaralalwi">
-        <img src="https://avatars.githubusercontent.com/u/25439498?v=4" width="100px;" alt="Omar Al Alwi"/>
+        <img src="https://avatars.githubusercontent.com/u/25439498?v=4" width="50px;" alt="Omar AlAlwi"/>
         <br />
         <sub><b>Omar AlAlwi</b></sub>
       </a>
