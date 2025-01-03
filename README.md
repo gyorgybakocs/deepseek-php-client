@@ -20,8 +20,7 @@
 
 ---
 ## Overview
-**Deepseek PHP Client** is a robust and community-driven PHP client library for seamless integration with the [Deepseek](https://www.deepseek.com/) API, offering efficient access to advanced AI and data processing capabilities
-
+**Deepseek PHP Client** is a robust and community-driven PHP client library for seamless integration with the [Deepseek](https://www.deepseek.com/) API.
 ### Key Features
 - **Easy Integration:** Simplifies interaction with the Deepseek API using a PHP client.
 - **Method Chaining:** Supports fluent method chaining for building requests.
