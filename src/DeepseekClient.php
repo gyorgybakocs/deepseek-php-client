@@ -43,6 +43,8 @@ class DeepseekClient implements DeepseekClientContract
      */
     protected bool $stream;
 
+    protected int $temperature;
+
     /**
      * Initialize the DeepseekClient with a PSR-compliant HTTP client.
      *
@@ -61,6 +63,7 @@ class DeepseekClient implements DeepseekClientContract
             QueryFlags::MESSAGES->value => $this->queries,
             QueryFlags::MODEL->value    => $this->model,
             QueryFlags::STREAM->value   => $this->stream,
+            QueryFlags::TEMPERATURE->value   => $this->temperature,
         ];
         // Clear queries after sending
         $this->queries = [];
@@ -120,6 +123,12 @@ class DeepseekClient implements DeepseekClientContract
     public function withStream(bool $stream = true): self
     {
         $this->stream = $stream;
+        return $this;
+    }
+
+    public function setTemperature(int $temperature): self
+    {
+        $this->temperature = $temperature;
         return $this;
     }
 

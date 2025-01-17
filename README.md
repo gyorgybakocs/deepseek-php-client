@@ -73,6 +73,7 @@ $response = DeepseekClient::build($apiKey, 'https://api.deepseek.com/v2', 500)
     ->query('System setup query', 'system')
     ->query('User input message', 'user')
     ->withModel(Models::CODER->value)
+    ->setTemperature(1.5)
     ->run();
 
 echo 'API Response:'.$response;
