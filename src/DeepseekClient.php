@@ -43,7 +43,7 @@ class DeepseekClient implements DeepseekClientContract
      */
     protected bool $stream;
 
-    protected int $temperature;
+    protected float $temperature;
 
     /**
      * Initialize the DeepseekClient with a PSR-compliant HTTP client.
@@ -126,7 +126,7 @@ class DeepseekClient implements DeepseekClientContract
         return $this;
     }
 
-    public function setTemperature(int $temperature): self
+    public function setTemperature(float $temperature): self
     {
         $this->temperature = $temperature;
         return $this;
