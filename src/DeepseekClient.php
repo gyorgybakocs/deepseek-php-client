@@ -3,6 +3,7 @@
 namespace DeepseekPhp;
 
 use DeepseekPhp\Contracts\DeepseekClientContract;
+use DeepseekPhp\Contracts\Models\ResultContract;
 use DeepseekPhp\Enums\Queries\QueryRoles;
 use DeepseekPhp\Enums\Requests\HeaderFlags;
 use DeepseekPhp\Enums\Requests\QueryFlags;
@@ -46,6 +47,12 @@ class DeepseekClient implements DeepseekClientContract
     protected float $temperature;
 
     /**
+     * response result contract
+     * @var ResultContract
+     */
+    protected ResultContract $result;
+
+    /**
      * Initialize the DeepseekClient with a PSR-compliant HTTP client.
      *
      * @param ClientInterface $httpClient The HTTP client used for making API requests.
@@ -67,7 +74,8 @@ class DeepseekClient implements DeepseekClientContract
         ];
         // Clear queries after sending
         $this->queries = [];
-        return (new Resource($this->httpClient))->sendRequest($requestData);
+        $this->result = (new Resource($this->httpClient))->sendRequest($requestData);
+        return $this->getResult()->getContent();
     }
 
     /**
@@ -140,4 +148,12 @@ class DeepseekClient implements DeepseekClientContract
         ];
     }
 
+    /**
+     * response result model
+     * @return \DeepseekPhp\Contracts\Models\ResultContract
+     */
+    public function getResult(): ResultContract
+    {
+        return $this->result;
+    }
 }
