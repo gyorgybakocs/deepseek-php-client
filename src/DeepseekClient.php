@@ -8,7 +8,7 @@ use DeepseekPhp\Factories\ApiFactory;
 use DeepseekPhp\Enums\Queries\QueryRoles;
 use DeepseekPhp\Enums\Requests\QueryFlags;
 use DeepseekPhp\Enums\Requests\HeaderFlags;
-use DeepseekPhp\Constants\TemperatureValues;
+use DeepseekPhp\Enums\Configs\TemperatureValues;
 use DeepseekPhp\Contracts\DeepseekClientContract;
 use DeepseekPhp\Traits\Resources\{HasChat, HasCoder};
 
@@ -56,7 +56,7 @@ class DeepseekClient implements DeepseekClientContract
         $this->httpClient = $httpClient;
         $this->model = null;
         $this->stream = false;
-        $this->temperature = TemperatureValues::GENERAL_CONVERSATION;
+        $this->temperature = (float) TemperatureValues::GENERAL_CONVERSATION->value;
     }
 
     public function run(): string
