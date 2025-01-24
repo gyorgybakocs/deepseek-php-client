@@ -4,13 +4,18 @@ declare(strict_types=1);
 
 namespace DeepseekPhp\Resources;
 
+use DeepseekPhp\Contracts\Models\ResultContract;
 use DeepseekPhp\Contracts\Resources\ResourceContract;
 use DeepseekPhp\Enums\Configs\DefaultConfigs;
 use DeepseekPhp\Enums\Models;
 use DeepseekPhp\Enums\Data\DataTypes;
 use DeepseekPhp\Enums\Requests\EndpointSuffixes;
 use DeepseekPhp\Enums\Requests\QueryFlags;
+use DeepseekPhp\Models\BadResult;
+use DeepseekPhp\Models\FailureResult;
+use DeepseekPhp\Models\SuccessResult;
 use DeepseekPhp\Traits\Queries\HasQueryParams;
+use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Client\ClientInterface;
 
@@ -39,23 +44,33 @@ class Resource implements ResourceContract
      * Send a request to the API endpoint.
      *
      * This method sends a POST request to the API endpoint, including the query data
-     * and custom headers, and returns the response body as a string.
+     * and custom headers, and returns the response as a result contract.
      *
      * @param array $requestData The data to send in the request.
-     * @return string The response body.
+     * @return ResultContract The response result.
      *
-     * @throws \RuntimeException If the request fails.
      */
-    public function sendRequest(array $requestData): string
+    public function sendRequest(array $requestData): ResultContract
     {
         try {
             $response = $this->client->post($this->getEndpointSuffix(), [
                 'json' => $this->resolveHeaders($requestData),
             ]);
 
-            return $response->getBody()->getContents();
-        } catch (GuzzleException $e) {
-            throw new \RuntimeException("Deepseek API request failed: " . $e->getMessage());
+            return (new SuccessResult())->setResponse($response);
+        } catch (BadResponseException $badResponse) {
+
+            $response = $badResponse->getResponse();
+            return (new BadResult())->setResponse($response);
+        
+        } catch (GuzzleException $error) {
+            
+            return new FailureResult($error->getCode(), $error->getMessage());
+
+        } catch (\Exception $error) {
+
+            return new FailureResult($error->getCode(), '{"error":"'.$error->getMessage().'"}');
+
         }
     }
 
