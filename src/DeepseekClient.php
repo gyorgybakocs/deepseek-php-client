@@ -2,14 +2,15 @@
 
 namespace DeepseekPhp;
 
-use DeepseekPhp\Contracts\DeepseekClientContract;
-use DeepseekPhp\Enums\Queries\QueryRoles;
-use DeepseekPhp\Enums\Requests\HeaderFlags;
-use DeepseekPhp\Enums\Requests\QueryFlags;
-use DeepseekPhp\Factories\ApiFactory;
 use DeepseekPhp\Resources\Resource;
-use DeepseekPhp\Traits\Resources\{HasChat, HasCoder};
 use Psr\Http\Client\ClientInterface;
+use DeepseekPhp\Factories\ApiFactory;
+use DeepseekPhp\Enums\Queries\QueryRoles;
+use DeepseekPhp\Enums\Requests\QueryFlags;
+use DeepseekPhp\Enums\Requests\HeaderFlags;
+use DeepseekPhp\Constants\TemperatureValues;
+use DeepseekPhp\Contracts\DeepseekClientContract;
+use DeepseekPhp\Traits\Resources\{HasChat, HasCoder};
 
 class DeepseekClient implements DeepseekClientContract
 {
@@ -55,6 +56,7 @@ class DeepseekClient implements DeepseekClientContract
         $this->httpClient = $httpClient;
         $this->model = null;
         $this->stream = false;
+        $this->temperature = TemperatureValues::GENERAL_CONVERSATION;
     }
 
     public function run(): string
