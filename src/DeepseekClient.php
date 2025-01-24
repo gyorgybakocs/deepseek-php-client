@@ -11,7 +11,6 @@ use DeepseekPhp\Enums\Queries\QueryRoles;
 use DeepseekPhp\Enums\Requests\QueryFlags;
 use DeepseekPhp\Enums\Requests\HeaderFlags;
 use DeepseekPhp\Enums\Configs\TemperatureValues;
-use DeepseekPhp\Contracts\DeepseekClientContract;
 use DeepseekPhp\Traits\Resources\{HasChat, HasCoder};
 
 class DeepseekClient implements DeepseekClientContract
