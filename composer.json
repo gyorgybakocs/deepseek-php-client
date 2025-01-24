@@ -5,6 +5,8 @@
         "deepseek",
         "deepseek-php-client",
         "deepseek-api",
+        "DeepSeek-R1",
+        "DeepSeek-R1-Zero",
         "php-deepseek",
         "deepseek-coder",
         "deepseek-chat",
@@ -59,7 +61,7 @@
             "role": "creator"
         }
     ],
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": {
         "php": "^8.1.0",
         "php-http/discovery": "^1.20.0",
