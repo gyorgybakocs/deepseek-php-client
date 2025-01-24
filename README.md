@@ -117,6 +117,24 @@ Thanks to these wonderful people for contributing to this project! 💖
       <br />
       🏆 Contributer
     </td>
+    <td align="center">
+      <a href="https://github.com/moassaad">
+        <img src="https://avatars.githubusercontent.com/u/155223476?v=4" width="50px;" alt="Mohammad Asaad"/>
+        <br />
+        <sub><b>Mohammad Asaad</b></sub>
+      </a>
+      <br />
+      🏆 Contributer
+    </td>
+    <td align="center">
+      <a href="https://github.com/OpadaAlzaiede">
+        <img src="https://avatars.githubusercontent.com/u/48367429?v=4" width="50px;" alt="Opada Alzaiede"/>
+        <br />
+        <sub><b>Opada Alzaiede</b></sub>
+      </a>
+      <br />
+      🏆 Contributer
+    </td>
     <!-- Contributors -->
   </tr>
 </table>
