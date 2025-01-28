@@ -83,6 +83,8 @@ echo 'API Response:'.$response;
 
 ### [Laravel Deepseek Package](https://github.com/deepseek-php/deepseek-laravel)
 
+### [Symfony Deepseek Package](https://github.com/deepseek-php/deepseek-symfony)
+
 ---
 
 ## Testing
