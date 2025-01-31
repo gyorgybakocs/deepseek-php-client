@@ -9,7 +9,6 @@ use Psr\Http\Client\ClientInterface;
 use DeepSeekPhp\Factories\ApiFactory;
 use DeepSeekPhp\Enums\Queries\QueryRoles;
 use DeepSeekPhp\Enums\Requests\QueryFlags;
-use DeepSeekPhp\Enums\Requests\HeaderFlags;
 use DeepSeekPhp\Enums\Configs\TemperatureValues;
 use DeepSeekPhp\Traits\Resources\{HasChat, HasCoder};
 
