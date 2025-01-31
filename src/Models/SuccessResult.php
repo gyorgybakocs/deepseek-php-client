@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DeepSeekPhp\Models;
-
+namespace DeepSeek\Models;
 
 class SuccessResult extends ResultAbstract
 {
-    
+
 }
 

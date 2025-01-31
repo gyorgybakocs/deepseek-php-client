@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepSeekPhp\Enums\Queries;
+namespace DeepSeek\Enums\Queries;
 
 enum QueryRoles: string
 {

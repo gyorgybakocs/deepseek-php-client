@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepSeekPhp\Enums\Configs;
+namespace DeepSeek\Enums\Configs;
 
 enum DefaultConfigs: string
 {

@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use DeepSeekPhp\DeepseekClient;
+use DeepSeek\DeepSeekClient;
 
 class DeepseekTest extends TestCase
 {

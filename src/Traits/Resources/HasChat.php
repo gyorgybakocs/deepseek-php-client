@@ -1,8 +1,8 @@
 <?php
 
-namespace DeepSeekPhp\Traits\Resources;
+namespace DeepSeek\Traits\Resources;
 
-use DeepSeekPhp\Resources\Chat;
+use DeepSeek\Resources\Chat;
 
 trait HasChat
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace DeepSeekPhp\Contracts\Factories;
+namespace DeepSeek\Contracts\Factories;
 
-use DeepSeekPhp\Factories\ApiFactory;
+use DeepSeek\Factories\ApiFactory;
 use GuzzleHttp\Client;
 
 interface ApiFactoryContract

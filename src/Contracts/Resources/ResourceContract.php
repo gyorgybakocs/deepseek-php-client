@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepSeekPhp\Contracts\Resources;
+namespace DeepSeek\Contracts\Resources;
 
 /**
  * Interface for defining the structure of resource classes.
