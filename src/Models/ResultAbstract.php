@@ -25,7 +25,6 @@ abstract class ResultAbstract implements ResultContract
     protected function setStatusCode(int $statusCode)
     {
         $this->statusCode = $statusCode;
-        return $this;
     }
     public function getStatusCode(): int
     {
