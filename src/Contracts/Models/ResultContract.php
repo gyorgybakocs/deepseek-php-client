@@ -1,12 +1,11 @@
 <?php
 
-namespace DeepSeekPhp\Contracts\Models;
-
+namespace DeepSeek\Contracts\Models;
 
 interface ResultContract
 {
     /**
-     * result status code 
+     * result status code
      * @return int
      */
     public function getStatusCode(): int;

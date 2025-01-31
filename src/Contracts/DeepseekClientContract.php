@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepSeekPhp\Contracts;
+namespace DeepSeek\Contracts;
 
 interface DeepseekClientContract
 {
