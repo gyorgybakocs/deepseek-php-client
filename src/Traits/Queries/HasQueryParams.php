@@ -1,9 +1,9 @@
 <?php
 
-namespace DeepSeekPhp\Traits\Queries;
+namespace DeepSeek\Traits\Queries;
 
-use DeepseekPhp\Enums\Data\DataTypes;
-use DeepseekPhp\Enums\Requests\QueryFlags;
+use DeepSeek\Enums\Data\DataTypes;
+use DeepSeek\Enums\Requests\QueryFlags;
 
 trait HasQueryParams
 {

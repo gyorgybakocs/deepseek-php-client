@@ -3,48 +3,32 @@
     "description": "deepseek PHP client is a robust and community-driven PHP client library for seamless integration with the Deepseek API, offering efficient access to advanced AI and data processing capabilities.",
     "keywords": [
         "deepseek",
-        "deepseek-php-client",
-        "deepseek-api",
-        "DeepSeek-R1",
-        "DeepSeek-R1-Zero",
-        "php-deepseek",
-        "deepseek-coder",
-        "deepseek-chat",
-        "deepseek-math",
-        "deepseek-integration",
-        "openai",
+        "ai",
         "sdk",
-        "codex",
-        "GPT-3",
-        "DALL-E",
         "api",
+        "php",
         "client",
-        "deepseek-sdk",
+        "llm",
+        "nlp",
+        "openai",
+        "qwen",
+        "machine-learning",
         "php-sdk",
-        "php-ai",
-        "ai-for-php",
         "ai-sdk",
         "ai-api",
-        "natural",
-        "language",
-        "processing",
-        "deepseek-php-library",
-        "deepseek-client",
         "natural-language-processing",
-        "ai-integration",
-        "machine-learning",
-        "php-machine-learning",
-        "php-iot",
-        "nlp",
-        "data-processing",
-        "deep-learning",
-        "deepseek-library",
-        "php-library",
         "api-integration",
         "php-api-client",
         "deepseek-ai",
-        "php-openai-alternative",
-        "ai-client-library"
+        "ai-client-library",
+        "text-generation",
+        "generative-ai",
+        "api-wrapper",
+        "rest-client",
+        "developer-tools",
+        "php-ai-integration",
+        "deepseek-api",
+        "openai-alternative"
     ],
     "homepage": "https://github.com/deepseek-php/deepseek-php-client",
     "license": "MIT",
@@ -61,7 +45,7 @@
             "role": "creator"
         }
     ],
-    "version": "1.0.2",
+    "version": "2.0.0",
     "require": {
         "php": "^8.1.0",
         "php-http/discovery": "^1.20.0",
@@ -86,12 +70,12 @@
     },
     "autoload": {
         "psr-4": {
-            "DeepseekPhp\\": "src/"
+            "DeepSeek\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "DeepseekPhp\\Tests\\": "tests/"
+            "DeepSeek\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",

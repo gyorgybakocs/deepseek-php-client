@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepseekPhp\Enums;
+namespace DeepSeek\Enums;
 
 enum Models: string
 {
