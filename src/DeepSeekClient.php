@@ -13,7 +13,7 @@ use DeepSeek\Enums\Requests\HeaderFlags;
 use DeepSeek\Enums\Configs\TemperatureValues;
 use DeepSeek\Traits\Resources\{HasChat, HasCoder};
 
-class DeepseekClient implements DeepseekClientContract
+class DeepSeekClient implements DeepseekClientContract
 {
     use HasChat, HasCoder;
 
