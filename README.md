@@ -71,7 +71,7 @@ $response = DeepSeekClient::build('your-api-key')
     ->query('Explain quantum computing in simple terms')
     ->run();
 
-echo $response; // "Quantum computing uses qubits to..."
+echo $response;
 ```
 
 📌 Defaults used:
