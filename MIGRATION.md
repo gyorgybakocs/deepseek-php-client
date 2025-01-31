@@ -15,12 +15,12 @@ Update all imports in your codebase.
 
 ##### Replace:
 ```php
-use DeepseekPhp\DeepseekClient;
+use DeepseekPhp\Someclass;
 ```
 
 ##### With:
 ```php
-use DeepSeek\DeepseekClient;
+use DeepSeek\Someclass;
 ```
 
 ### Migration Guide
