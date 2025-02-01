@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DeepseekPhp\Resources;
+namespace DeepSeek\Resources;
 
 class Chat extends Resource
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace DeepseekPhp\Enums\Data;
+namespace DeepSeek\Enums\Data;
 
 enum DataTypes: string
 {

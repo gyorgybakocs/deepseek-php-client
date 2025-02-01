@@ -1,8 +1,8 @@
 <?php
 
-namespace DeepseekPhp\Traits\Resources;
+namespace DeepSeek\Traits\Resources;
 
-use DeepseekPhp\Resources\Coder;
+use DeepSeek\Resources\Coder;
 
 trait HasCoder
 {

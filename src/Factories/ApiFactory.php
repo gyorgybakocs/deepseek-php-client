@@ -1,10 +1,10 @@
 <?php
 
-namespace DeepseekPhp\Factories;
+namespace DeepSeek\Factories;
 
-use DeepseekPhp\Contracts\Factories\ApiFactoryContract;
-use DeepseekPhp\Enums\Configs\DefaultConfigs;
-use DeepseekPhp\Enums\Requests\HeaderFlags;
+use DeepSeek\Contracts\Factories\ApiFactoryContract;
+use DeepSeek\Enums\Configs\DefaultConfigs;
+use DeepSeek\Enums\Requests\HeaderFlags;
 use GuzzleHttp\Client;
 
 final class ApiFactory implements ApiFactoryContract

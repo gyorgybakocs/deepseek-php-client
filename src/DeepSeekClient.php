@@ -1,19 +1,19 @@
 <?php
 
-namespace DeepseekPhp;
+namespace DeepSeek;
 
-use DeepseekPhp\Contracts\DeepseekClientContract;
-use DeepseekPhp\Contracts\Models\ResultContract;
-use DeepseekPhp\Resources\Resource;
+use DeepSeek\Contracts\DeepseekClientContract;
+use DeepSeek\Contracts\Models\ResultContract;
+use DeepSeek\Resources\Resource;
 use Psr\Http\Client\ClientInterface;
-use DeepseekPhp\Factories\ApiFactory;
-use DeepseekPhp\Enums\Queries\QueryRoles;
-use DeepseekPhp\Enums\Requests\QueryFlags;
-use DeepseekPhp\Enums\Requests\HeaderFlags;
-use DeepseekPhp\Enums\Configs\TemperatureValues;
-use DeepseekPhp\Traits\Resources\{HasChat, HasCoder};
+use DeepSeek\Factories\ApiFactory;
+use DeepSeek\Enums\Queries\QueryRoles;
+use DeepSeek\Enums\Requests\QueryFlags;
+use DeepSeek\Enums\Requests\HeaderFlags;
+use DeepSeek\Enums\Configs\TemperatureValues;
+use DeepSeek\Traits\Resources\{HasChat, HasCoder};
 
-class DeepseekClient implements DeepseekClientContract
+class DeepSeekClient implements DeepseekClientContract
 {
     use HasChat, HasCoder;
 
@@ -54,7 +54,7 @@ class DeepseekClient implements DeepseekClientContract
     protected ResultContract $result;
 
     /**
-     * Initialize the DeepseekClient with a PSR-compliant HTTP client.
+     * Initialize the DeepSeekClient with a PSR-compliant HTTP client.
      *
      * @param ClientInterface $httpClient The HTTP client used for making API requests.
      */
@@ -81,12 +81,12 @@ class DeepseekClient implements DeepseekClientContract
     }
 
     /**
-     * Create a new DeepseekClient instance with the given API key.
+     * Create a new DeepSeekClient instance with the given API key.
      *
      * @param string $apiKey The API key for authentication.
      * @param string|null $baseUrl The base URL for the API (optional).
      * @param int|null $timeout The timeout duration for requests in seconds (optional).
-     * @return self A new instance of the DeepseekClient.
+     * @return self A new instance of the DeepSeekClient.
      */
     public static function build(string $apiKey, ?string $baseUrl = null, ?int $timeout = null): self
     {
@@ -163,7 +163,7 @@ class DeepseekClient implements DeepseekClientContract
 
     /**
      * response result model
-     * @return \DeepseekPhp\Contracts\Models\ResultContract
+     * @return \DeepSeek\Contracts\Models\ResultContract
      */
     public function getResult(): ResultContract
     {

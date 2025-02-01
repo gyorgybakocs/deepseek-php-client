@@ -1,10 +1,10 @@
 <?php
-namespace DeepseekPhp\Tests;
+namespace DeepSeek\Tests;
 
 
-use DeepseekPhp\Enums\Requests\HTTPState;
+use DeepSeek\Enums\Requests\HTTPState;
 use PHPUnit\Framework\TestCase;
-use DeepseekPhp\DeepseekClient;
+use DeepSeek\DeepSeekClient;
 
 class HandelResultDeepseekTest extends TestCase
 {
@@ -17,7 +17,7 @@ class HandelResultDeepseekTest extends TestCase
     }
     public function test_ok_response()
     {
-        $deepseek = DeepseekClient::build($this->apiKey)
+        $deepseek = DeepSeekClient::build($this->apiKey)
             ->query('Hello Deepseek, how are you today?')
             ->setTemperature(1.5);
         $response = $deepseek->run();
@@ -28,7 +28,7 @@ class HandelResultDeepseekTest extends TestCase
     }
     public function test_can_not_access_with_api_expired_payment()
     {
-        $deepseek = DeepseekClient::build($this->expiredApiKey)
+        $deepseek = DeepSeekClient::build($this->expiredApiKey)
             ->query('Hello Deepseek, how are you today?')
             ->setTemperature(1.5);
         $response = $deepseek->run();
@@ -42,7 +42,7 @@ class HandelResultDeepseekTest extends TestCase
     }
     public function test_access_with_wrong_api_key()
     {
-        $deepseek = DeepseekClient::build($this->apiKey."wrong-api-key")
+        $deepseek = DeepSeekClient::build($this->apiKey."wrong-api-key")
             ->query('Hello Deepseek, how are you today?')
             ->setTemperature(1.5);
         $response = $deepseek->run();

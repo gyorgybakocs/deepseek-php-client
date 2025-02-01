@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace DeepseekPhp\Models;
+namespace DeepSeek\Models;
 
-
-use DeepseekPhp\Contracts\Models\ResultContract;
-use DeepseekPhp\Enums\Requests\HTTPState;
+use DeepSeek\Contracts\Models\ResultContract;
+use DeepSeek\Enums\Requests\HTTPState;
 use Psr\Http\Message\ResponseInterface;
 
 abstract class ResultAbstract implements ResultContract
@@ -14,7 +13,7 @@ abstract class ResultAbstract implements ResultContract
     protected ?int $statusCode;
     protected ?string $content;
     /**
-     * handel response comeing from request
+     * handel response coming from request
      * @var ResponseInterface|null
      */
     protected ?ResponseInterface $response;
@@ -26,7 +25,6 @@ abstract class ResultAbstract implements ResultContract
     protected function setStatusCode(int $statusCode)
     {
         $this->statusCode = $statusCode;
-        return $this;
     }
     public function getStatusCode(): int
     {

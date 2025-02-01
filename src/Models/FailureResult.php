@@ -2,10 +2,9 @@
 
 declare(strict_types=1);
 
-namespace DeepseekPhp\Models;
+namespace DeepSeek\Models;
 
-
-class FailureResult extends ResultAbstract 
+class FailureResult extends ResultAbstract
 {
 
 }

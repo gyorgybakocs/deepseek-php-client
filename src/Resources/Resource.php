@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace DeepseekPhp\Resources;
+namespace DeepSeek\Resources;
 
-use DeepseekPhp\Contracts\Models\ResultContract;
-use DeepseekPhp\Contracts\Resources\ResourceContract;
-use DeepseekPhp\Enums\Configs\DefaultConfigs;
-use DeepseekPhp\Enums\Models;
-use DeepseekPhp\Enums\Data\DataTypes;
-use DeepseekPhp\Enums\Requests\EndpointSuffixes;
-use DeepseekPhp\Enums\Requests\QueryFlags;
-use DeepseekPhp\Models\BadResult;
-use DeepseekPhp\Models\FailureResult;
-use DeepseekPhp\Models\SuccessResult;
-use DeepseekPhp\Traits\Queries\HasQueryParams;
+use DeepSeek\Contracts\Models\ResultContract;
+use DeepSeek\Contracts\Resources\ResourceContract;
+use DeepSeek\Enums\Configs\DefaultConfigs;
+use DeepSeek\Enums\Models;
+use DeepSeek\Enums\Data\DataTypes;
+use DeepSeek\Enums\Requests\EndpointSuffixes;
+use DeepSeek\Enums\Requests\QueryFlags;
+use DeepSeek\Models\BadResult;
+use DeepSeek\Models\FailureResult;
+use DeepSeek\Models\SuccessResult;
+use DeepSeek\Traits\Queries\HasQueryParams;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Client\ClientInterface;
