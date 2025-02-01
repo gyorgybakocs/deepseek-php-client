@@ -1,10 +1,10 @@
 <?php
-namespace DeepSeek\Tests;
+namespace Tests\Feature;
 
 
+use DeepSeek\DeepSeekClient;
 use DeepSeek\Enums\Requests\HTTPState;
 use PHPUnit\Framework\TestCase;
-use DeepSeek\DeepSeekClient;
 
 class HandelResultDeepseekTest extends TestCase
 {
@@ -47,7 +47,7 @@ class HandelResultDeepseekTest extends TestCase
             ->setTemperature(1.5);
         $response = $deepseek->run();
         $result = $deepseek->getResult();
-        
+
         $this->assertNotEmpty($response);
         $this->assertEquals(HTTPState::UNAUTHORIZED->value, $result->getStatusCode());
     }
