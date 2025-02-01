@@ -2,8 +2,6 @@
 
 namespace DeepSeek\Contracts;
 
-use DeepSeek\DeepSeekClient;
-
 interface DeepseekClientContract
 {
     public static function build(string $apiKey): self;
