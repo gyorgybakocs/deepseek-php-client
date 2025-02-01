@@ -117,6 +117,9 @@ Detailed release notes available in [CHANGELOG.md](CHANGELOG.md)
 
 ```bash
 composer test
+
+./vendor/bin/pest
+
 ```
 
 Test coverage coming in v2.1.
