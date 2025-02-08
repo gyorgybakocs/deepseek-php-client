@@ -30,14 +30,17 @@ class Resource implements ResourceContract
      */
     protected ClientInterface $client;
 
+    protected ?string $endpointSuffixes;
+
     /**
      * Initialize the Resource with a Guzzle HTTP client.
      *
      * @param ClientInterface $client The HTTP client instance for making requests.
      */
-    public function __construct(ClientInterface $client)
+    public function __construct(ClientInterface $client, ?string $endpointSuffixes = null)
     {
         $this->client = $client;
+        $this->endpointSuffixes = $endpointSuffixes ?: EndpointSuffixes::CHAT->value;
     }
 
     /**
@@ -47,13 +50,13 @@ class Resource implements ResourceContract
      * and custom headers, and returns the response as a result contract.
      *
      * @param array $requestData The data to send in the request.
+     * @param string|null $requestMethod method of request Get or POST.
      * @return ResultContract The response result.
-     *
      */
-    public function sendRequest(array $requestData): ResultContract
+    public function sendRequest(array $requestData, ?string $requestMethod = 'POST'): ResultContract
     {
         try {
-            $response = $this->client->post($this->getEndpointSuffix(), [
+            $response = $this->client->{$requestMethod}($this->getEndpointSuffix(), [
                 'json' => $this->resolveHeaders($requestData),
             ]);
 
@@ -62,9 +65,9 @@ class Resource implements ResourceContract
 
             $response = $badResponse->getResponse();
             return (new BadResult())->setResponse($response);
-        
+
         } catch (GuzzleException $error) {
-            
+
             return new FailureResult($error->getCode(), $error->getMessage());
 
         } catch (\Exception $error) {
@@ -119,7 +122,7 @@ class Resource implements ResourceContract
      */
     public function getEndpointSuffix(): string
     {
-        return EndpointSuffixes::CHAT->value;
+        return $this->endpointSuffixes;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace DeepSeek;
 
 use DeepSeek\Contracts\DeepseekClientContract;
 use DeepSeek\Contracts\Models\ResultContract;
+use DeepSeek\Enums\Requests\EndpointSuffixes;
 use DeepSeek\Resources\Resource;
 use Psr\Http\Client\ClientInterface;
 use DeepSeek\Factories\ApiFactory;
@@ -53,6 +54,10 @@ class DeepSeekClient implements DeepseekClientContract
      */
     protected ResultContract $result;
 
+    protected string $requestMethod;
+
+    protected ?string $endpointSuffixes;
+
     /**
      * Initialize the DeepSeekClient with a PSR-compliant HTTP client.
      *
@@ -63,6 +68,8 @@ class DeepSeekClient implements DeepseekClientContract
         $this->httpClient = $httpClient;
         $this->model = null;
         $this->stream = false;
+        $this->requestMethod = 'POST';
+        $this->endpointSuffixes = EndpointSuffixes::CHAT->value;
         $this->temperature = (float) TemperatureValues::GENERAL_CONVERSATION->value;
     }
 
@@ -76,7 +83,7 @@ class DeepSeekClient implements DeepseekClientContract
         ];
         // Clear queries after sending
         $this->queries = [];
-        $this->setResult((new Resource($this->httpClient))->sendRequest($requestData));
+        $this->setResult((new Resource($this->httpClient, $this->endpointSuffixes))->sendRequest($requestData, $this->requestMethod));
         return $this->getResult()->getContent();
     }
 
@@ -109,6 +116,18 @@ class DeepSeekClient implements DeepseekClientContract
     public function query(string $content, ?string $role = null): self
     {
         $this->queries[] = $this->buildQuery($content, $role);
+        return $this;
+    }
+
+    /**
+     * get list of available models ..
+     *
+     * @return self The current instance for method chaining.
+     */
+    public function getModelsList(): self
+    {
+        $this->endpointSuffixes = EndpointSuffixes::MODELS_LIST->value;
+        $this->requestMethod = 'GET';
         return $this;
     }
 

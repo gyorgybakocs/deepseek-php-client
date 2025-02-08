@@ -24,6 +24,7 @@
 - [🚀 Quick Start](#-quick-start)
   - [Basic Usage](#basic-usage)
   - [Advanced Configuration](#advanced-configuration)
+  - [Get Models List](#get-models-list)
   - [Framework Integration](#-framework-integration)
 - [🆕 Migration Guide](#-migration-guide)
 - [📝 Changelog](#-changelog)
@@ -91,6 +92,18 @@ $response = DeepSeekClient::build('your-api-key')
     ->run();
 
 echo 'API Response:'.$response;
+```
+
+### Get Models List
+
+```php
+use DeepSeek\DeepSeekClient;
+
+$response = DeepSeekClient::build('your-api-key')
+    ->getModelsList()
+    ->run();
+
+echo $response; // {"object":"list","data":[{"id":"deepseek-chat","object":"model","owned_by":"deepseek"},{"id":"deepseek-reasoner","object":"model","owned_by":"deepseek"}]}
 ```
 
 ### 🛠 Framework Integration
