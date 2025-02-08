@@ -87,7 +87,7 @@ use DeepSeek\Enums\Models;
 
 $response = DeepSeekClient::build('your-api-key')
     ->withBaseUrl('https://api.deepseek.com/v2')
-    ->withModel(Models::CODER)
+    ->withModel(Models::CODER->value)
     ->withTemperature(1.2)
     ->run();
 
