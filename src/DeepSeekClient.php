@@ -2,7 +2,7 @@
 
 namespace DeepSeek;
 
-use DeepSeek\Contracts\DeepseekClientContract;
+use DeepSeek\Contracts\ClientContract;
 use DeepSeek\Contracts\Models\ResultContract;
 use DeepSeek\Enums\Requests\EndpointSuffixes;
 use DeepSeek\Resources\Resource;
@@ -10,11 +10,10 @@ use Psr\Http\Client\ClientInterface;
 use DeepSeek\Factories\ApiFactory;
 use DeepSeek\Enums\Queries\QueryRoles;
 use DeepSeek\Enums\Requests\QueryFlags;
-use DeepSeek\Enums\Requests\HeaderFlags;
 use DeepSeek\Enums\Configs\TemperatureValues;
 use DeepSeek\Traits\Resources\{HasChat, HasCoder};
 
-class DeepSeekClient implements DeepseekClientContract
+class DeepSeekClient implements ClientContract
 {
     use HasChat, HasCoder;
 
@@ -113,14 +112,14 @@ class DeepSeekClient implements DeepseekClientContract
      * @param string|null $role
      * @return self The current instance for method chaining.
      */
-    public function query(string $content, ?string $role = null): self
+    public function query(string $content, ?string $role = "user"): self
     {
         $this->queries[] = $this->buildQuery($content, $role);
         return $this;
     }
 
     /**
-     * get list of available models ..
+     * get list of available models .
      *
      * @return self The current instance for method chaining.
      */
@@ -161,7 +160,7 @@ class DeepSeekClient implements DeepseekClientContract
         return $this;
     }
 
-    protected function buildQuery(string $content, ?string $role = null): array
+    public function buildQuery(string $content, ?string $role = null): array
     {
         return [
             'role' => $role ?: QueryRoles::USER->value,
