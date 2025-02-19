@@ -135,7 +135,7 @@ Detailed release notes available in [CHANGELOG.md](CHANGELOG.md)
 Test coverage coming in v2.1.
 
 ---
-<div align="center">
+<div>
 
 # 🐘✨ **DeepSeek PHP Community** ✨🐘
 
@@ -143,7 +143,6 @@ Click the button bellow or [join here](https://t.me/deepseek_php_community) to b
 
 [![Join Telegram](https://img.shields.io/badge/Join-Telegram-blue?style=for-the-badge&logo=telegram)](https://t.me/deepseek_php_community)
 
-</div>
 
 ### **Channel Structure** 🏗️
 - 🗨️ **General** - Daily chatter
@@ -152,6 +151,8 @@ Click the button bellow or [join here](https://t.me/deepseek_php_community) to b
 - 🚀 **Releases & Updates** - Version tracking & migration support
 - 🐞 **Issues & Bug Reports** - Collective problem-solving
 - 🤝 **Pull Requests** - Code collaboration & reviews
+
+</div>
 
 ---
 
