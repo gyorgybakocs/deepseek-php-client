@@ -77,14 +77,10 @@ final class ApiFactory implements ApiFactoryContract
             $this->initialize();
         }
 
-        switch (strtolower($clientType)) {
-            case ClientTypes::GUZZLE->value:
-                return new Client($this->clientConfig);
-            case ClientTypes::SYMFONY->value:
-                $symfonyClient = HttpClient::create($this->clientConfig);
-                return new Psr18Client($symfonyClient);
-            default:
-                throw new InvalidArgumentException("Unsupported client type: {$clientType}");
-        }
+        return match (strtolower($clientType)) {
+            ClientTypes::GUZZLE->value => new Client($this->clientConfig),
+            ClientTypes::SYMFONY->value => new Psr18Client(HttpClient::create($this->clientConfig)),
+            default => throw new InvalidArgumentException("Unsupported client type: {$clientType}")
+        };
     }
 }
