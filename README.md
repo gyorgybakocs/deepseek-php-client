@@ -16,6 +16,9 @@
       <img src="https://img.shields.io/github/actions/workflow/status/deepseek-php/deepseek-php-client/tests.yml" alt="Tests Status">
     </a>
   </p>
+
+[AR](README-AR.md) | [CN](README-CN.md)
+
 </p>
 
 ## Table of Contents

@@ -17,6 +17,9 @@
       <img src="https://img.shields.io/github/actions/workflow/status/deepseek-php/deepseek-php-client/tests.yml" alt="حالة الاختبارات">
     </a>
   </p>
+
+[الإنجليزية](README.md) | [الصينية](README-CN.md)
+
 </p>
 
 ## فهرس المحتويات
