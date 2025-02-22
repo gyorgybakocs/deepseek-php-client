@@ -4,6 +4,7 @@ namespace DeepSeek;
 
 use DeepSeek\Contracts\ClientContract;
 use DeepSeek\Contracts\Models\ResultContract;
+use DeepSeek\Enums\Requests\ClientTypes;
 use DeepSeek\Enums\Requests\EndpointSuffixes;
 use DeepSeek\Resources\Resource;
 use Psr\Http\Client\ClientInterface;
@@ -94,13 +95,15 @@ class DeepSeekClient implements ClientContract
      * @param int|null $timeout The timeout duration for requests in seconds (optional).
      * @return self A new instance of the DeepSeekClient.
      */
-    public static function build(string $apiKey, ?string $baseUrl = null, ?int $timeout = null): self
+    public static function build(string $apiKey, ?string $baseUrl = null, ?int $timeout = null, ?string $clientType = null): self
     {
+        $clientType = $clientType ?? ClientTypes::GUZZLE->value;
+
         $httpClient = ApiFactory::build()
             ->setBaseUri($baseUrl)
             ->setTimeout($timeout)
             ->setKey($apiKey)
-            ->run();
+            ->run($clientType);
 
         return new self($httpClient);
     }

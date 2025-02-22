@@ -24,6 +24,7 @@
 - [🚀 Quick Start](#-quick-start)
   - [Basic Usage](#basic-usage)
   - [Advanced Configuration](#advanced-configuration)
+  - [Use with Symfony HttpClient](#use-with-symfony-httpclient)
   - [Get Models List](#get-models-list)
   - [Framework Integration](#-framework-integration)
 - [🆕 Migration Guide](#-migration-guide)
@@ -37,12 +38,13 @@
 
 ## ✨ Features
 
-- **Seamless API Integration**: PHP-first interface for DeepSeek's AI capabilities
-- **Fluent Builder Pattern**: Chainable methods for intuitive request building
-- **Enterprise Ready**: PSR-18 compliant HTTP client integration
-- **Model Flexibility**: Support for multiple DeepSeek models (Coder, Chat, etc.)
-- **Streaming Ready**: Built-in support for real-time response handling
-- **Framework Friendly**: Laravel & Symfony packages available
+- **Seamless API Integration**: PHP-first interface for DeepSeek's AI capabilities.
+- **Fluent Builder Pattern**: Chainable methods for intuitive request building.
+- **Enterprise Ready**: PSR-18 compliant HTTP client integration.
+- **Model Flexibility**: Support for multiple DeepSeek models (Coder, Chat, etc.).
+- **Streaming Ready**: Built-in support for real-time response handling.
+- **Many Http Clients**: easy to use `Guzzle http client` (default) , or `symfony http client`.
+- **Framework Friendly**: Laravel & Symfony packages available.
 
 ---
 
@@ -85,13 +87,30 @@ echo $response;
 use DeepSeek\DeepSeekClient;
 use DeepSeek\Enums\Models;
 
-$response = DeepSeekClient::build('your-api-key')
-    ->withBaseUrl('https://api.deepseek.com/v2')
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, clientType:'guzzle');
+
+$response = $client
     ->withModel(Models::CODER->value)
+    ->withStream()
     ->withTemperature(1.2)
     ->run();
 
 echo 'API Response:'.$response;
+```
+
+### Use with Symfony HttpClient
+the package already built with `symfony Http client`,  if you need to use package with `symfony` Http Client , it is easy to achieve that, just pass `clientType:'symfony'` with `build` function.
+ 
+ex with symfony:
+
+```php
+//  with defaults baseUrl and timeout
+$client = DeepSeekClient::build('your-api-key', clientType:'symfony')
+// with customization
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, 'symfony');
+
+$client->query('Explain quantum computing in simple terms')
+       ->run();
 ```
 
 ### Get Models List
@@ -109,8 +128,6 @@ echo $response; // {"object":"list","data":[{"id":"deepseek-chat","object":"mode
 ### 🛠 Framework Integration
 
 ### [Laravel Deepseek Package](https://github.com/deepseek-php/deepseek-laravel)
-
-### [Symfony Deepseek Package](https://github.com/deepseek-php/deepseek-symfony)
 
 ---
 
