@@ -230,6 +230,15 @@ A huge thank you to these amazing people who have contributed to this project! �
       <br />
       ⭐ Contributor
     </td>
+    <td align="center">
+      <a href="https://github.com/VinchanGit">
+        <img src="https://avatars.githubusercontent.com/u/38177046?v=4" width="60px;" style="border-radius:50%;" alt="Vinchan"/>
+        <br />
+        <b>Vinchan</b>
+      </a>
+      <br />
+      ⭐ Contributor
+    </td>
   </tr>
 </table>
 

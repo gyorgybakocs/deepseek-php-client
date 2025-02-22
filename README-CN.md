@@ -23,7 +23,8 @@
 - [📦 安装](#-安装)
 - [🚀 快速入门](#-快速入门)
     - [基本用法](#基本用法)
-    - [高级配置](#高级配置)
+    - [高级配置](#advanced-configuration)
+    - [Use with Symfony HttpClient](#use-with-symfony-httpclient)
     - [获取模型列表](#获取模型列表)
     - [框架集成](#-框架集成)
 - [🆕 迁移指南](#-迁移指南)
@@ -79,19 +80,36 @@ echo $response;
 - Model: `deepseek-chat`
 - Temperature: 0.8
 
-### 高级配置
+### Advanced Configuration
 
 ```php
 use DeepSeek\DeepSeekClient;
 use DeepSeek\Enums\Models;
 
-$response = DeepSeekClient::build('your-api-key')
-    ->withBaseUrl('https://api.deepseek.com/v2')
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, clientType:'guzzle');
+
+$response = $client
     ->withModel(Models::CODER->value)
+    ->withStream()
     ->withTemperature(1.2)
     ->run();
 
 echo 'API Response:'.$response;
+```
+
+### Use with Symfony HttpClient
+the package already built with `symfony Http client`,  if you need to use package with `symfony` Http Client , it is easy to achieve that, just pass `clientType:'symfony'` with `build` function.
+
+ex with symfony:
+
+```php
+//  with defaults baseUrl and timeout
+$client = DeepSeekClient::build('your-api-key', clientType:'symfony')
+// with customization
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, 'symfony');
+
+$client->query('Explain quantum computing in simple terms')
+       ->run();
 ```
 
 ### 获取模型列表
@@ -110,7 +128,6 @@ echo $response; // {"object":"list","data":[{"id":"deepseek-chat","object":"mode
 
 ### [Laravel Deepseek Package](https://github.com/deepseek-php/deepseek-laravel)
 
-### [Symfony Deepseek Package](https://github.com/deepseek-php/deepseek-symfony)
 
 ---
 
@@ -189,6 +206,15 @@ echo $response; // {"object":"list","data":[{"id":"deepseek-chat","object":"mode
         <img src="https://avatars.githubusercontent.com/u/3237266?v=4" width="60px;" style="border-radius:50%;" alt="Hisham Bin Ateya"/>
         <br />
         <b>Hisham Bin Ateya</b>
+      </a>
+      <br />
+      ⭐ Contributor
+    </td>
+    <td align="center">
+      <a href="https://github.com/VinchanGit">
+        <img src="https://avatars.githubusercontent.com/u/38177046?v=4" width="60px;" style="border-radius:50%;" alt="陈文锋"/>
+        <br />
+        <b>陈文锋</b>
       </a>
       <br />
       ⭐ Contributor
