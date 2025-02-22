@@ -110,7 +110,7 @@ ex with symfony:
 //  with defaults baseUrl and timeout
 $client = DeepSeekClient::build('your-api-key', clientType:'symfony')
 // with customization
-$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, 'symfony');
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, clientType:'symfony');
 
 $client->query('Explain quantum computing in simple terms')
        ->run();
