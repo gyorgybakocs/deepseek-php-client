@@ -4,6 +4,7 @@ namespace DeepSeek\Contracts\Factories;
 
 use DeepSeek\Factories\ApiFactory;
 use GuzzleHttp\Client;
+use Psr\Http\Client\ClientInterface;
 
 interface ApiFactoryContract
 {
@@ -43,5 +44,5 @@ interface ApiFactoryContract
      *
      * @return Client
      */
-    public function run(): Client;
+    public function run(?string $clientType = null): ClientInterface;
 }

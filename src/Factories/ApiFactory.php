@@ -13,7 +13,7 @@ use Symfony\Component\HttpClient\Psr18Client;
 use RuntimeException;
 use InvalidArgumentException;
 
-final class ApiFactory
+final class ApiFactory implements ApiFactoryContract
 {
     protected string $apiKey;
     protected string $baseUrl;
