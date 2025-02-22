@@ -87,9 +87,11 @@ echo $response;
 use DeepSeek\DeepSeekClient;
 use DeepSeek\Enums\Models;
 
-$response = DeepSeekClient::build('your-api-key')
-    ->withBaseUrl('https://api.deepseek.com/v2')
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, clientType:'guzzle');
+
+$response = $client
     ->withModel(Models::CODER->value)
+    ->withStream()
     ->withTemperature(1.2)
     ->run();
 
@@ -102,9 +104,13 @@ the package already built with `symfony Http client`,  if you need to use packag
 ex with symfony:
 
 ```php
-$response = DeepSeekClient::build('your-api-key', clientType:'symfony')
-    ->query('Explain quantum computing in simple terms')
-    ->run();
+//  with defaults baseUrl and timeout
+$client = DeepSeekClient::build('your-api-key', clientType:'symfony')
+// with customization
+$client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deepseek.com/v3', timeout:30, 'symfony');
+
+$client->query('Explain quantum computing in simple terms')
+       ->run();
 ```
 
 ### Get Models List
