@@ -95,7 +95,7 @@ $client = DeepSeekClient::build(apiKey:'your-api-key', baseUrl:'https://api.deep
 $response = $client
     ->withModel(Models::CODER->value)
     ->withStream()
-    ->withTemperature(1.2)
+    ->setTemperature(1.2)
     ->run();
 
 echo 'API Response:'.$response;
