@@ -20,6 +20,7 @@ use DeepSeek\Models\FailureResult;
 use DeepSeek\Models\SuccessResult;
 use DeepSeek\Traits\Queries\HasQueryParams;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Nyholm\Psr7\Factory\Psr17Factory;
