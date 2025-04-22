@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace DeepSeek\Resources;
 
 use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\RequestOptions;
+use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\GuzzleException;
 use DeepSeek\Contracts\Models\ResultContract;
 use DeepSeek\Contracts\Resources\ResourceContract;
 use DeepSeek\Enums\Configs\DefaultConfigs;
@@ -16,8 +19,6 @@ use DeepSeek\Models\BadResult;
 use DeepSeek\Models\FailureResult;
 use DeepSeek\Models\SuccessResult;
 use DeepSeek\Traits\Queries\HasQueryParams;
-use GuzzleHttp\Exception\BadResponseException;
-use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
