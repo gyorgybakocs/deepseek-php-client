@@ -10,6 +10,7 @@ use DeepSeek\Resources\Chat;
 use DeepSeek\Resources\Resource;
 use Generator;
 use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\StreamInterface;
 use DeepSeek\Factories\ApiFactory;
 use DeepSeek\Enums\Queries\QueryRoles;
 use DeepSeek\Enums\Requests\QueryFlags;
