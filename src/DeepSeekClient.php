@@ -16,6 +16,7 @@ use DeepSeek\Enums\Queries\QueryRoles;
 use DeepSeek\Enums\Requests\QueryFlags;
 use DeepSeek\Enums\Configs\TemperatureValues;
 use DeepSeek\Traits\Resources\{HasChat, HasCoder};
+use Illuminate\Support\Str;
 use RuntimeException;
 
 class DeepSeekClient implements ClientContract
