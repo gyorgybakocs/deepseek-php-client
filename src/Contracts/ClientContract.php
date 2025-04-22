@@ -2,8 +2,11 @@
 
 namespace DeepSeek\Contracts;
 
+use Generator;
+
 interface ClientContract
 {
+    public function stream(): Generator;
     public function run(): string;
     public static function build(string $apiKey, ?string $baseUrl = null, ?int $timeout = null): self;
     public function query(string $content, ?string $role = "user"): self;

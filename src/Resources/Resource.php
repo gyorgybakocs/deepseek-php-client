@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace DeepSeek\Resources;
 
+use GuzzleHttp\Client as GuzzleClient;
 use DeepSeek\Contracts\Models\ResultContract;
 use DeepSeek\Contracts\Resources\ResourceContract;
 use DeepSeek\Enums\Configs\DefaultConfigs;
@@ -71,6 +72,51 @@ class Resource implements ResourceContract
             return new FailureResult($error->getCode(), '{"error":"'.$error->getMessage().'"}');
         }
     }
+
+    public function sendStreamRequest(array $requestData, string $requestMethod = 'POST', int $streamTimeout = 120): ResponseInterface
+    {
+        if (!($this->client instanceof GuzzleClient)) {
+            throw new RuntimeException(sprintf(
+                'The sendStreamRequest method currently requires a GuzzleHttp\Client instance ' .
+                'to ensure reliable streaming options, but received %s. ' .
+                'Please configure ApiFactory to use ClientTypes::GUZZLE for streaming.',
+                get_class($this->client)
+            ));
+        }
+
+        $requestData[QueryFlags::STREAM->value] = true;
+
+        $options = [
+            RequestOptions::HEADERS => [
+                'Accept'        => 'text/event-stream',
+                'Cache-Control' => 'no-cache',
+            ],
+            RequestOptions::JSON    => $requestData,
+            RequestOptions::STREAM  => true,
+            RequestOptions::TIMEOUT => $streamTimeout,
+            RequestOptions::CONNECT_TIMEOUT => 10,
+            RequestOptions::HTTP_ERRORS => false,
+        ];
+
+        \Log::debug('Sending stream request via Guzzle', [
+            'url' => $this->getEndpointSuffix(),
+            'options_subset' => [
+                'stream' => true, 'timeout' => $streamTimeout, /*...*/ ]
+        ]);
+
+        $guzzleClient = $this->client;
+
+        $response = $guzzleClient->request(
+            strtoupper($requestMethod),
+            $this->getEndpointSuffix(),
+            $options
+        );
+
+        \Log::debug('Received initial stream response', ['status' => $response->getStatusCode()]);
+
+        return $response;
+    }
+
 
     /**
      * Merge request data with default headers.

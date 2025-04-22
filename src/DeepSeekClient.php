@@ -6,13 +6,16 @@ use DeepSeek\Contracts\ClientContract;
 use DeepSeek\Contracts\Models\ResultContract;
 use DeepSeek\Enums\Requests\ClientTypes;
 use DeepSeek\Enums\Requests\EndpointSuffixes;
+use DeepSeek\Resources\Chat;
 use DeepSeek\Resources\Resource;
+use Generator;
 use Psr\Http\Client\ClientInterface;
 use DeepSeek\Factories\ApiFactory;
 use DeepSeek\Enums\Queries\QueryRoles;
 use DeepSeek\Enums\Requests\QueryFlags;
 use DeepSeek\Enums\Configs\TemperatureValues;
 use DeepSeek\Traits\Resources\{HasChat, HasCoder};
+use RuntimeException;
 
 class DeepSeekClient implements ClientContract
 {
@@ -71,6 +74,45 @@ class DeepSeekClient implements ClientContract
         $this->requestMethod = 'POST';
         $this->endpointSuffixes = EndpointSuffixes::CHAT->value;
         $this->temperature = (float) TemperatureValues::GENERAL_CONVERSATION->value;
+    }
+
+    /**
+     * Initiates a streaming request using the modified resource method
+     * and yields Server-Sent Event data chunks.
+     *
+     * @return Generator Yields string data parts (JSON chunk or '[DONE]').
+     * @throws RuntimeException If the HTTP request fails or the stream cannot be read.
+     */
+    public function stream(): Generator
+    {
+        $this->stream = true;
+        $requestDataPayload = [
+            QueryFlags::MESSAGES->value => $this->queries,
+            QueryFlags::MODEL->value    => $this->model,
+            QueryFlags::STREAM->value   => $this->stream,
+            QueryFlags::TEMPERATURE->value => $this->temperature,
+        ];
+        $this->queries = [];
+
+        $resource = new Chat($this->httpClient);
+
+        \Log::debug('Calling Resource->sendStreamRequest');
+
+        $psr7Response = $resource->sendStreamRequest($requestDataPayload, $this->requestMethod);
+
+        if ($psr7Response->getStatusCode() >= 300) {
+            $errorBody = $psr7Response->getBody()->getContents(); // Read error body
+            \Log::error('DeepSeek API returned error status in stream', [
+                'status_code' => $psr7Response->getStatusCode(), 'error_body' => $errorBody
+            ]);
+            throw new RuntimeException('DeepSeek API stream request failed: HTTP ' . $psr7Response->getStatusCode());
+        }
+
+        $bodyStream = $psr7Response->getBody();
+
+        \Log::debug('Starting to yield chunks from response stream...');
+        yield from $this->yieldChunksFromStream($bodyStream);
+        \Log::debug('Finished yielding chunks.');
     }
 
     public function run(): string
@@ -189,5 +231,31 @@ class DeepSeekClient implements ClientContract
     public function getResult(): ResultContract
     {
         return $this->result;
+    }
+
+    /**
+     * Private helper generator to process the PSR-7 stream and yield SSE data parts.
+     * (This is the same generator function as proposed before)
+     * @param StreamInterface $bodyStream The stream to read from.
+     * @return Generator Yields string data parts.
+     */
+    private function yieldChunksFromStream(StreamInterface $bodyStream): Generator
+    {
+        while (!$bodyStream->eof()) {
+            try {
+                $line = $bodyStream->readLine();
+                if (Str::startsWith($line, 'data:')) {
+                    $dataPart = trim(Str::after($line, 'data:'));
+                    yield $dataPart;
+                    if ($dataPart === '[DONE]') {
+                        break;
+                    }
+                }
+            } catch (RuntimeException $e) {
+                \Log::warning('Error reading stream line, stopping.', ['error' => $e->getMessage()]);
+                break;
+            }
+        }
+        $bodyStream->close();
     }
 }
