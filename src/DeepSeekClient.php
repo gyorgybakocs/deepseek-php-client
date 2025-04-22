@@ -257,6 +257,12 @@ class DeepSeekClient implements ClientContract
                     foreach ($lines as $line) {
                         if (Str::startsWith($line, 'data:')) {
                             $dataPart = trim(Str::after($line, 'data:'));
+
+                            \Log::debug('!!!!!!!!!!!!!!!! Generator attempting to yield:', [
+                                'dataPart_type' => gettype($dataPart),
+                                'dataPart_content_start' => is_string($dataPart) ? substr($dataPart, 0, 100) : null
+                            ]);
+
                             yield $dataPart;
 
                             if ($dataPart === '[DONE]') {
