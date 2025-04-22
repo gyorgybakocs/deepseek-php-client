@@ -234,29 +234,55 @@ class DeepSeekClient implements ClientContract
         return $this->result;
     }
 
-    /**
-     * Private helper generator to process the PSR-7 stream and yield SSE data parts.
-     * (This is the same generator function as proposed before)
-     * @param StreamInterface $bodyStream The stream to read from.
-     * @return Generator Yields string data parts.
-     */
     private function yieldChunksFromStream(StreamInterface $bodyStream): Generator
     {
+        $buffer = '';
+        $eventSeparator = "\n\n";
+
         while (!$bodyStream->eof()) {
             try {
-                $line = $bodyStream->readLine();
-                if (Str::startsWith($line, 'data:')) {
-                    $dataPart = trim(Str::after($line, 'data:'));
-                    yield $dataPart;
-                    if ($dataPart === '[DONE]') {
-                        break;
+                $chunk = $bodyStream->read(4096);
+                if ($chunk === '') {
+                    continue;
+                }
+
+                $buffer .= $chunk;
+
+                while (($pos = strpos($buffer, $eventSeparator)) !== false) {
+                    $messageBlock = substr($buffer, 0, $pos);
+                    $buffer = substr($buffer, $pos + strlen($eventSeparator));
+
+                    $lines = explode("\n", $messageBlock);
+                    foreach ($lines as $line) {
+                        if (Str::startsWith($line, 'data:')) {
+                            $dataPart = trim(Str::after($line, 'data:'));
+                            yield $dataPart;
+
+                            if ($dataPart === '[DONE]') {
+                                \Log::debug('Received [DONE] signal in stream.');
+                                $bodyStream->close();
+                                return;
+                            }
+                        }
                     }
                 }
-            } catch (RuntimeException $e) {
-                \Log::warning('Error reading stream line, stopping.', ['error' => $e->getMessage()]);
+
+            } catch (\RuntimeException $e) {
+                \Log::error('Error reading from stream.', ['error' => $e->getMessage()]);
                 break;
             }
         }
-        $bodyStream->close();
+
+        if (!empty($buffer)) {
+            \Log::warning('Stream ended with unprocessed data in buffer.', [
+                'buffer_length' => strlen($buffer),
+                'buffer_start' => substr($buffer, 0, 100)
+            ]);
+        }
+
+        \Log::debug('Stream processing finished (EOF reached or [DONE] received).');
+        if ($bodyStream->isReadable()) {
+            $bodyStream->close();
+        }
     }
 }
