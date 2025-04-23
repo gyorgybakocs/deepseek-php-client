@@ -98,8 +98,6 @@ class DeepSeekClient implements ClientContract
 
         $resource = new Chat($this->httpClient);
 
-        \Log::debug('Calling Resource->sendStreamRequest');
-
         $psr7Response = $resource->sendStreamRequest($requestDataPayload, $this->requestMethod);
 
         if ($psr7Response->getStatusCode() >= 300) {
@@ -112,9 +110,7 @@ class DeepSeekClient implements ClientContract
 
         $bodyStream = $psr7Response->getBody();
 
-        \Log::debug('Starting to yield chunks from response stream...');
         yield from $this->yieldChunksFromStream($bodyStream);
-        \Log::debug('Finished yielding chunks.');
     }
 
     public function run(): string
@@ -258,15 +254,9 @@ class DeepSeekClient implements ClientContract
                         if (Str::startsWith($line, 'data:')) {
                             $dataPart = trim(Str::after($line, 'data:'));
 
-                            \Log::debug('!!!!!!!!!!!!!!!! Generator attempting to yield:', [
-                                'dataPart_type' => gettype($dataPart),
-                                'dataPart_content_start' => is_string($dataPart) ? substr($dataPart, 0, 100) : null
-                            ]);
-
                             yield $dataPart;
 
                             if ($dataPart === '[DONE]') {
-                                \Log::debug('Received [DONE] signal in stream.');
                                 $bodyStream->close();
                                 return;
                             }
@@ -287,7 +277,6 @@ class DeepSeekClient implements ClientContract
             ]);
         }
 
-        \Log::debug('Stream processing finished (EOF reached or [DONE] received).');
         if ($bodyStream->isReadable()) {
             $bodyStream->close();
         }

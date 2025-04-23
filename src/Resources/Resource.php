@@ -100,12 +100,6 @@ class Resource implements ResourceContract
             RequestOptions::HTTP_ERRORS => false,
         ];
 
-        \Log::debug('Sending stream request via Guzzle', [
-            'url' => $this->getEndpointSuffix(),
-            'options_subset' => [
-                'stream' => true, 'timeout' => $streamTimeout, /*...*/ ]
-        ]);
-
         $guzzleClient = $this->client;
 
         $response = $guzzleClient->request(
@@ -113,8 +107,6 @@ class Resource implements ResourceContract
             $this->getEndpointSuffix(),
             $options
         );
-
-        \Log::debug('Received initial stream response', ['status' => $response->getStatusCode()]);
 
         return $response;
     }
